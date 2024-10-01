@@ -1,0 +1,15 @@
+meme_dict = {
+            "CRINGE": "Sesuatu yang sangat aneh atau memalukan",
+            "LOL": "Tanggapan umum terhadap sesuatu yang lucu",
+            "CAP": "Ketika seseorang mengatakan sebuah kebohongan",
+            "YAP": "Ketika seseorang tidak berhenti berbicara",
+            "ROFL": "tanggapan terhadap lelucon",
+            "CREEPY": " menakutkan, tidak menyenangkan"
+            }
+
+for _ in range(5):
+    word = input("Ketik kata yang tidak Kamu mengerti (gunakan huruf kapital semua!): ")
+    if word in meme_dict.keys():
+        print(word, "adalah", meme_dict[word], "                                                                                                           ")
+    else:
+        print("Kata tidak ada di Kamus")
