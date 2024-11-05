@@ -1,0 +1,69 @@
+import discord
+import random
+from discord.ext import commands
+
+import os
+import requests
+files = os.listdir('images')
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='!', intents=intents)
+
+def get_duck_image_url():    
+    url = 'https://random-d.uk/api/random'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
+
+tips = ["Mengurangi menggunakan plastik.", "Menggunakan kain lap, bukan tisu sekali pakai.", "Memilih produk dengan kemasan yang mudah didaur ulang.","mengomposkan sampah organik seperti sisa makanan dan daun kering.","mendaur ulang barang yang sudah tidak terpakai.", "Hindari membeli produk dengan kemasan plastik berlebih.", "Menggunakan botol minum dan tempat makan yang bisa dipakai ulang."]
+
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Hi! I am a bot {bot.user}!')
+
+@bot.command()
+async def heh(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
+
+@bot.command()
+async def add(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left + right)
+
+@bot.command()
+async def subtract(ctx, left: int, right: int):
+    """subtracts two numbers together."""
+    await ctx.send(left - right)
+
+@bot.command()
+async def repeat(ctx, times: int, content='repeating...'):
+    """Repeats a message multiple times."""
+    for i in range(times):
+        await ctx.send(content)
+
+@bot.command()
+async def meme1(ctx):
+    with open('images/meme_1.jpg', 'rb') as f:
+        # Mari simpan file perpustakaan/library Discord yang dikonversi dalam variabel ini!
+        picture = discord.File(f)
+   # Kita kemudian dapat mengirim file ini sebagai tolok ukur!
+    await ctx.send(file=picture)
+
+@bot.command('duck')
+async def duck(ctx):
+    '''Setelah kita memanggil perintah bebek (duck), program akan memanggil fungsi get_duck_image_url'''
+    image_url = get_duck_image_url()
+    await ctx.send(image_url)
+
+@bot.command()
+async def tip(ctx):
+    randomtips = random.choice(tips)
+    await ctx.send(randomtips)
+
+bot.run("")
