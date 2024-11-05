@@ -17,7 +17,7 @@ def get_duck_image_url():
     data = res.json()
     return data['url']
 
-tips = ["Mengurangi menggunakan plastik.", "Menggunakan kain lap, bukan tisu sekali pakai.", "Memilih produk dengan kemasan yang mudah didaur ulang.","mengomposkan sampah organik seperti sisa makanan dan daun kering.","mendaur ulang barang yang sudah tidak terpakai.", "Hindari membeli produk dengan kemasan plastik berlebih.", "Menggunakan botol minum dan tempat makan yang bisa dipakai ulang."]
+tips = ["Mengurangi menggunakan plastik.", "Menggunakan kain lap, bukan tisu sekali pakai.", "Memilih produk dengan kemasan yang mudah didaur ulang.","mengomposkan sampah organik seperti sisa makanan dan daun kering.","mendaur ulang barang yang sudah tidak terpakai.", "Hindari membeli produk dengan kemasan plastik berlebih.", "Menggunakan botol minum dan tempat makan yang bisa dipakai ulang.", "Menyewa atau meminjam barang yang jarang digunakan.", "mengganti sikat gigi plastik dengan sikat bambu yang biodegradable.", "Menghindari pembelian impulsif untuk mengurangi limbah dari barang yang tak terpakai."]
 
 @bot.event
 async def on_ready():
@@ -65,5 +65,18 @@ async def duck(ctx):
 async def tip(ctx):
     randomtips = random.choice(tips)
     await ctx.send(randomtips)
+
+
+@bot.command()
+async def jenissampah(ctx):
+    with open('images/sampah2.png', 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send("Sampah ada 3 jenis yaitu:")
+    await ctx.send(file=picture)
+
+@bot.command()
+async def sampah(ctx):
+
+    await ctx.send("Sampah adalah material sisa atau limbah yang sudah tidak lagi berguna, diinginkan, atau tidak memiliki nilai ekonomi bagi pemiliknya. Sampah umumnya dihasilkan dari berbagai aktivitas manusia, baik dari kegiatan rumah tangga, industri, pertanian, maupun kegiatan komersial lainnya.")
 
 bot.run("")
